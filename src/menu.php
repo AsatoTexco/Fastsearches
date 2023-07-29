@@ -351,9 +351,9 @@ a{
 
 
 
-<script src="js/clipboard.js"></script>
-<script src="js/sweetalert2.js"></script>
-<script src="js/custom.js"></script>
+<script src="../js/clipboard.js"></script>
+<script src="../js/sweetalert2.js"></script>
+<script src="../js/custom.js"></script>
 
 <?php
 

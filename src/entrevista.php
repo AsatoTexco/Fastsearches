@@ -343,6 +343,6 @@ foreach($lDados_pergunta as $row_dados_pergunta){
 
     
 
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
