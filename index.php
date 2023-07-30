@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+ob_start();
+
+require 'config.php';
+
+
+
+
+$user = filter_input(INPUT_POST,'usuario');
+$senha = filter_input(INPUT_POST,'senha');
+
+
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -187,7 +204,39 @@ background-color: rgb(41, 41, 41);
 </head>
 <body>
 
-<script>const Toast = Swal.mixin({
+<?php
+
+if($user && $senha){
+
+    $sql = $pdo->prepare("SELECT * FROM user WHERE user = :user AND senha = :senha ");
+    $sql->bindValue(":user",$user);
+    $sql->bindValue(":senha",$senha);
+    $sql->execute();
+
+    if($sql->rowCount() > 0){
+        $lista = [];
+        $lista = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($lista as $row_dados){
+
+            $id = $row_dados['id'];
+            $nome = $row_dados['nome'];
+            $user = $row_dados['user'];
+            $senha = $row_dados['senha'];
+            
+           
+        }
+
+        $_SESSION['idP'] = $row_dados['id'];
+        $_SESSION['nomeP'] = $row_dados['nome'];
+        $_SESSION['login'] = 1;
+        
+        header("Location: menu.php");
+
+    }else{
+        // MENSAGEM DE ERRO  ->  SWEET ALERT BRO :)
+
+        echo("<script>const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
@@ -202,12 +251,19 @@ background-color: rgb(41, 41, 41);
     Toast.fire({
         icon: 'error',
         title: 'Senha Incorreta!'
-    })</script>
+    })</script>");
+
+    }
+        
     
 
 
 
- 
+    
+
+}
+
+?>
 
 <form action="" method="POST" class="menu">
   
